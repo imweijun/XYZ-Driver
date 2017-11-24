@@ -1,4 +1,4 @@
-package main.com.chai.models;
+package chai.models;
 
 public class User {
 

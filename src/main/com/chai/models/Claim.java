@@ -1,4 +1,4 @@
-package main.com.chai.models;
+package chai.models;
 
 import java.util.Date;
 

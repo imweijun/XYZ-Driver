@@ -1,4 +1,4 @@
-package main.com.chai.models;
+package chai.models;
 
 import java.util.Date;
 
@@ -70,15 +70,5 @@ public class Payment {
         this.member = member;
     }
 
-    @Override
-    public String toString() {
-        return "Payment{" +
-                "id=" + id +
-                ", typeOfPayment='" + typeOfPayment + '\'' +
-                ", amount=" + amount +
-                ", date=" + date +
-                ", time=" + time +
-                ", member=" + member +
-                '}';
-    }
+
 }
