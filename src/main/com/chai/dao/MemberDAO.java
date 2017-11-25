@@ -47,7 +47,7 @@ public class MemberDAO {
 
             preparedStatement           = connection.prepareStatement(getPasswordSqlString);
             preparedStatement.setString(1, member.getId());
-            preparedStatement.setString(2, member.getName());
+            preparedStatement.setString(2, member.getFirstName() + " " + member.getLastName());
             preparedStatement.setString(3, member.getAddress());
             preparedStatement.setString(4, dateService.dateToString(member.getDob()));
             preparedStatement.setString(5, dateService.dateToString(member.getDor()));

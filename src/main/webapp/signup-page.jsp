@@ -21,8 +21,12 @@
                     <p>Username and Password will be automatic generated.</p>
                         </tr>
                         <tr>
-                            <td><label>Name </label></td>
-                            <td><input type="text" name="name"/></td>
+                            <td><label>First Name </label></td>
+                            <td><input type="text" name="firstName"/></td>
+                        </tr>
+                        <tr>
+                            <td><label>Last Name </label></td>
+                            <td><input type="text" name="lastName"/></td>
                         </tr>
                         <tr>
                             <td><label>D.O.B </label></td>

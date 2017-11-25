@@ -7,7 +7,8 @@ import java.util.Date;
 public class Member {
 
     private String id;
-    private String name;
+    private String firstName;
+    private String lastName;
     private String address;
     private Date dob;
     private Date dor;
@@ -20,9 +21,10 @@ public class Member {
         this.dateService = new DateService("yyyy-MM-dd");
     }
 
-    public Member (String id, String name, String address, Date dob, Date dor, String status, float balance) {
+    public Member (String id, String firstName, String lastName,  String address, Date dob, Date dor, String status, float balance) {
         this.id = id;
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.address = address;
         this.dob = dob;
         this.dor = dor;
@@ -40,12 +42,20 @@ public class Member {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getAddress() {
@@ -102,14 +112,17 @@ public class Member {
 
     @Override
     public String toString() {
-        return "Members{" +
+        return "Member{" +
                 "id='" + id + '\'' +
-                ", name='" + name + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", address='" + address + '\'' +
                 ", dob=" + dob +
                 ", dor=" + dor +
                 ", status='" + status + '\'' +
                 ", balance=" + balance +
+                ", userAccount=" + userAccount +
+                ", dateService=" + dateService +
                 '}';
     }
 }

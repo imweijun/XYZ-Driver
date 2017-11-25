@@ -24,17 +24,19 @@ public class MemberSignUpController extends HttpServlet {
     // Register new member, generate their credentials and redirect them to signup-page-success page
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-        String name          = request.getParameter("name");
+        String firstName     = request.getParameter("firstName");
+        String lastName      = request.getParameter("lastName");
         String dobString     = request.getParameter("dob");
         String address       = request.getParameter("address");
 
-        String userId        = CredentialsGeneratorService.generateUserId(name);
+        String userId        = firstName.substring(0,2) + "-" + lastName;
         DateService dateService = new DateService("yyyy-MM-dd");
         Member newMember     = null;
 
         try {
             newMember     = new Member(userId,
-                    name,
+                    firstName,
+                    lastName,
                     address,
                     dateService.stringToDate(dobString),
                     new Date(),

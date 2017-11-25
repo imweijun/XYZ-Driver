@@ -24,7 +24,11 @@ public class MemberMapper {
         while(resultSet.next()){
             Member member = new Member();
             member.setId(resultSet.getString("id"));
-            member.setName(resultSet.getString("name"));
+            String nameTokens[] = resultSet.getString("name").split(" ");
+
+            member.setFirstName(nameTokens[2]);
+            member.setLastName(nameTokens[1]);
+
             member.setAddress(resultSet.getString("address"));
             member.setDob(dateService.stringToDate(resultSet.getString("dob")));
             member.setStatus(resultSet.getString("status"));

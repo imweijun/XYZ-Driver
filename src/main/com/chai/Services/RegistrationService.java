@@ -18,9 +18,11 @@ public class RegistrationService {
 
     public User registerMember(Member member){
 
+        DateService dateService = new DateService("ddMMYY");
+
         User newUser = new User();
-        newUser.setStatus("PROVISION");
-        newUser.setPassword(CredentialsGeneratorService.generateRandomPassword());
+        newUser.setStatus("APPLIED");
+        newUser.setPassword(dateService.dateToString(member.getDob()));
         newUser.setId(member.getId());
 
         userDAO.addUser(newUser);

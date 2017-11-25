@@ -10,7 +10,7 @@
         <div id="wrapper">
             <div id="header">
                 <h2>XYZ Driver Association (Admin)</h2>
-                <a href="${pageContext.request.contextPath}/admin-login-page.jsp">Log in as Member</a>
+                <a href="${pageContext.request.contextPath}/login-page.jsp">Log in as Member</a>
             </div>
         </div>
         <div id="container">
