@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -38,8 +39,10 @@ public class MemberAuthenticationController extends HttpServlet{
 
 
         // Redirect to dashboard page after logged in.
-        // Attach User object in variable loggedInUser, so its accisable in JSP
-        request.setAttribute("loggedInUser", user);
+        // Attach User object in variable session for 20 minutes
+        HttpSession session = request.getSession();
+        session.setAttribute("loggedInUser", user);
+
         request.getRequestDispatcher("dashboard-user-page.jsp").forward(request, response);
 
     }

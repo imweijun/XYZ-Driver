@@ -27,7 +27,7 @@
                         <th>Address</th>
                         <th>D.O.B</th>
                         <th>Status</th>
-                        <th>Balance (£)</th>
+                        <th>Balance (ï¿½)</th>
                     </tr>
                     <tr>
                         <th>mem-3</th>
@@ -70,7 +70,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Amount (£)</th>
+                        <th>Amount (ï¿½)</th>
                     </tr>
                     <tr>
                         <th>mem-4</th>
@@ -102,7 +102,7 @@
                         <th>ID</th>
                         <th>Name</th>
                         <th>Rationale</th>
-                        <th>Amount (£)</th>
+                        <th>Amount (ï¿½)</th>
                         <th></th>
                         <th></th>
                     </tr>

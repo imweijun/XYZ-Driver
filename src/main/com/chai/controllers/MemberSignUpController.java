@@ -1,10 +1,10 @@
 package chai.controllers;
 
-import chai.Services.AuthenticationService;
+
 import chai.Services.CredentialsGeneratorService;
 import chai.Services.DateService;
 import chai.Services.RegistrationService;
-import chai.dao.UserDAO;
+
 import chai.models.Member;
 import chai.models.User;
 
@@ -38,7 +38,7 @@ public class MemberSignUpController extends HttpServlet {
                     dateService.stringToDate(dobString),
                     new Date(),
                     "APPLIED",
-                    0);
+                    10);
 
         } catch (ParseException e) {
             e.printStackTrace();

@@ -37,5 +37,9 @@
         <servlet-name>MemberSignUpController</servlet-name>
         <url-pattern>/sign-up-member</url-pattern>
     </servlet-mapping>
+
+    <session-config>
+        <session-timeout>20</session-timeout><!-- 20 minutes session -->
+    </session-config>
 </web-app>
 

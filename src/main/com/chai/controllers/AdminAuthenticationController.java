@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -34,8 +35,10 @@ public class AdminAuthenticationController extends HttpServlet {
 
 
         // Redirect to dashboard page after logged in.
-        // Attach User object in variable loggedInUser, so its accisable in JSP
-        request.setAttribute("loggedInUser", admin);
+        // Attach User object in session, so its accisable in JSP
+        HttpSession session = request.getSession();
+        session.setAttribute("loggedInUser", admin);
+
         request.getRequestDispatcher("dashboard-admin-page.jsp").forward(request, response);
 
     }

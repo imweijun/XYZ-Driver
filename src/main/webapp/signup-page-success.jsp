@@ -13,7 +13,10 @@
             </div>
         </div>
         <div id="container">
-            <p>Registration Success. Your credentials below</p>
+            <p>
+                Registration Success. Your credentials below. <br />
+                Please settle the annual fee. Claims can only be made 6 months after registration.
+            </p>
             <p>Username: ${newUser.id} </p>
             <p>Password: ${newUser.password} </p>
             <p>Status: ${newUser.status} </p>
