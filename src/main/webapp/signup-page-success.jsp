@@ -14,9 +14,9 @@
         </div>
         <div id="container">
             <p>Registration Success. Your credentials below</p>
-            <p>Username: </p>
-            <p>Password: </p>
-            <p>Status: </p>
+            <p>Username: ${newUser.id} </p>
+            <p>Password: ${newUser.password} </p>
+            <p>Status: ${newUser.status} </p>
             <a href="login-page.jsp">Back to Login</a>
         </div>
     </body>

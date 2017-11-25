@@ -45,7 +45,12 @@ public class MemberSignUpController extends HttpServlet {
         }
 
         RegistrationService registrationService = new RegistrationService();
-        registrationService.registerMember(newMember);
+        User newUser = registrationService.registerMember(newMember);
+
+        // Redirect to dashboard page after logged in.
+        // Attach User object in variable loggedInUser, so its accisable in JSP
+        request.setAttribute("newUser", newUser);
+        request.getRequestDispatcher("signup-page-success.jsp").forward(request, response);
 
 
     }
