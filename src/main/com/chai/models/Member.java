@@ -1,5 +1,7 @@
 package chai.models;
 
+import chai.Services.DateService;
+
 import java.util.Date;
 
 public class Member {
@@ -11,8 +13,12 @@ public class Member {
     private Date dor;
     private String status;
     private float balance;
+    private User userAccount;
+    private DateService dateService;
 
-    public Member (){}
+    public Member (){
+        this.dateService = new DateService("yyyy-MM-dd");
+    }
 
     public Member (String id, String name, String address, Date dob, Date dor, String status, float balance) {
         this.id = id;
@@ -22,6 +28,8 @@ public class Member {
         this.dor = dor;
         this.status = status;
         this.balance = balance;
+        this.dateService = new DateService("yyyy-MM-dd");
+
     }
 
     public String getId() {
@@ -52,6 +60,10 @@ public class Member {
         return dob;
     }
 
+    public String getDobString() {
+        return this.dateService.dateToString(dob);
+    }
+
     public void setDob(Date dob) {
         this.dob = dob;
     }
@@ -78,6 +90,14 @@ public class Member {
 
     public void setBalance(float balance) {
         this.balance = balance;
+    }
+
+    public User getUserAccount() {
+        return userAccount;
+    }
+
+    public void setUserAccount(User userAccount) {
+        this.userAccount = userAccount;
     }
 
     @Override

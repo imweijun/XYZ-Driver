@@ -3,6 +3,7 @@ package chai.controllers;
 
 import chai.Services.CredentialsGeneratorService;
 import chai.Services.DateService;
+import chai.Services.MemberService;
 import chai.Services.RegistrationService;
 
 import chai.models.Member;
@@ -53,6 +54,14 @@ public class MemberSignUpController extends HttpServlet {
         request.getRequestDispatcher("signup-page-success.jsp").forward(request, response);
 
 
+    }
+
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        MemberService memberService = new MemberService();
+        PrintWriter writer = response.getWriter();
+
+        writer.println(memberService.getAllMembers());
     }
 
 }

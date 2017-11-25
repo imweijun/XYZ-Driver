@@ -11,6 +11,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MemberDAO {
 
@@ -51,7 +54,7 @@ public class MemberDAO {
             preparedStatement.setString(6, member.getStatus());
             preparedStatement.setFloat(7, member.getBalance());
 
-            System.out.println(getPasswordSqlString);
+
             preparedStatement.execute();
 
 
@@ -65,4 +68,41 @@ public class MemberDAO {
 
         return member;
     }
+
+
+    public List<Member> getAll(){
+
+        List<Member> members = new ArrayList<Member>();
+
+        Connection connection               = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet                 = null;
+
+
+
+        DateService dateService = new DateService("yyyy-MM-dd");
+
+        try {
+            connection                  = this.dataSource.getConnection();
+            String getPasswordSqlString = "SELECT * FROM members";
+
+            preparedStatement           = connection.prepareStatement(getPasswordSqlString);
+            resultSet = preparedStatement.executeQuery();
+
+            MemberMapper memberMapper = new MemberMapper();
+            members = memberMapper.mapMembers(resultSet);
+
+            connection.close();
+            preparedStatement.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return members;
+    }
+
 }
