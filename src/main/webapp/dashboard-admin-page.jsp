@@ -8,6 +8,7 @@
         <div id="wrapper">
             <div id="header">
                 <h2>XYZ Driver Association</h2>
+                <a href="${pageContext.request.contextPath}/logout">Log out</a>
             </div>
         </div>
         <div id="container">

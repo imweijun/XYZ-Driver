@@ -8,6 +8,7 @@
         <div id="wrapper">
             <div id="header">
                 <h2>XYZ Driver Association</h2>
+                <a href="${pageContext.request.contextPath}/logout">Log out</a>
             </div>
         </div>
         <div id="container">
@@ -18,7 +19,7 @@
                         <tr></tr>
                         <tr>
                             <td><label>Outstanding:</label></td>
-                            <td><label>£100</label></td>
+                            <td><label>ï¿½100</label></td>
                             <td><input type="submit" value="Payment" class="btn"/></td>
                             <td><input type="submit" value="Claim" class="btn"/></td>
                         </tr>
@@ -33,7 +34,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Payment Type</th>
-                        <th>Amount (£)</th>
+                        <th>Amount (ï¿½)</th>
                         <th>Date</th>
                         <th>Time</th>
                     </tr>
@@ -68,7 +69,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Rationale</th>
-                        <th>Amount (£)</th>
+                        <th>Amount (ï¿½)</th>
                         <th>Status</th>
                         <th>Date</th>
                     </tr>

@@ -1,3 +1,21 @@
+<%@ page import="chai.models.User" %>
+<%
+    User loggedinUser = (User) session.getAttribute("loggedInUser");
+
+    if(loggedinUser != null){
+
+        if(loggedinUser.getStatus().equals("ADMIN")){
+            response.sendRedirect("dashboard-admin-page.jsp");
+            return;
+        }else{
+            response.sendRedirect("dashboard-user-page.jsp");
+        }
+    }
+
+
+
+%>
+
 <!DOCTYPE html>
 <html>
     <head>

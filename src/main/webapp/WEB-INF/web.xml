@@ -38,6 +38,17 @@
         <url-pattern>/sign-up-member</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>LogoutController</servlet-name>
+        <servlet-class>
+            chai.controllers.LogoutController
+        </servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogoutController</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
     <session-config>
         <session-timeout>20</session-timeout><!-- 20 minutes session -->
     </session-config>
