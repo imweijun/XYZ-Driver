@@ -26,5 +26,16 @@
         <servlet-name>AdminAuthenticationController</servlet-name>
         <url-pattern>/authenticate-admin</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>MemberSignUpController</servlet-name>
+        <servlet-class>
+            chai.controllers.MemberSignUpController
+        </servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MemberSignUpController</servlet-name>
+        <url-pattern>/sign-up-member</url-pattern>
+    </servlet-mapping>
 </web-app>
 

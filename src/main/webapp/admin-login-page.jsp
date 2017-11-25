@@ -35,8 +35,6 @@
                 </table>
             </form>
             <br>
-            <!--note: we don't link to jsp, we link to controller class-->
-            <a href="signup-page.jsp">Sign Up</a>
         </div>
     </body>
 </html>

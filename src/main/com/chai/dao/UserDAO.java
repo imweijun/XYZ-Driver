@@ -2,6 +2,7 @@ package chai.dao;
 
 import chai.daoMappers.UserMapper;
 import chai.factories.DataSourceFactory;
+import chai.models.Member;
 import chai.models.User;
 
 import javax.sql.DataSource;
@@ -93,6 +94,46 @@ public class UserDAO {
 
         return adminUser;
     }
+
+
+    /**
+     * Inser a new user to user table
+     * @param user the User object to add
+     * @return the User object stored. Null if failed
+     */
+    public User addUser(User user){
+
+        Connection connection               = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet                 = null;
+
+        try {
+            connection                  = this.dataSource.getConnection();
+            String getPasswordSqlString = "INSERT INTO users " +
+                    "(id, password, status) " +
+                    "VALUES (?, ? ,?)";
+
+            preparedStatement           = connection.prepareStatement(getPasswordSqlString);
+            preparedStatement.setString(1, user.getId());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(3, user.getStatus());
+
+            System.out.println(getPasswordSqlString);
+            preparedStatement.execute();
+
+
+            connection.close();
+            preparedStatement.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return user;
+    }
+
+
 
 
 

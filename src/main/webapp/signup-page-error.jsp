@@ -14,7 +14,7 @@
         </div>
         <div id="container">
             <h3>Sign Up</h3>
-            <form action="${pageContext.request.contextPath}/sign-up-member">
+            <form action="${pageContext.request.contextPath}/sign-up-member" method="POST">
                 <table>
                     <tbody>
                         <tr>
@@ -38,6 +38,8 @@
                         </tr>
                     </tbody>
                 </table>
+
+                <p style="color:red">Please fill in all details correctly</p>
             </form>
             <br>
             <a href="login-page.jsp">Back to Login</a>

@@ -14,23 +14,23 @@
         </div>
         <div id="container">
             <h3>Sign Up</h3>
-            <form action="/">
+            <form action="${pageContext.request.contextPath}/sign-up-member" method="POST">
                 <table>
                     <tbody>
                         <tr>
                     <p>Username and Password will be automatic generated.</p>
                         </tr>
                         <tr>
-                            <td><label>First Name </label></td>
-                            <td><input type="text" name="firstName"/></td>
-                        </tr>
-                        <tr>
-                            <td><label>Last Name </label></td>
-                            <td><input type="text" name="lastName"/></td>
+                            <td><label>Name </label></td>
+                            <td><input type="text" name="name"/></td>
                         </tr>
                         <tr>
                             <td><label>D.O.B </label></td>
-                            <td><input type="text" name="dob"/></td>
+                            <td><input type="date" name="dob"/></td>
+                        </tr>
+                        <tr>
+                            <td><label>Address </label></td>
+                            <td><input type="text" name="address"/></td>
                         </tr>
                         <tr>
                             <td><label></label></td>

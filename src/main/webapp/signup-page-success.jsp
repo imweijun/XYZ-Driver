@@ -13,33 +13,10 @@
             </div>
         </div>
         <div id="container">
-            <h3>Sign Up</h3>
-            <form action="${pageContext.request.contextPath}/sign-up-member">
-                <table>
-                    <tbody>
-                        <tr>
-                    <p>Username and Password will be automatic generated.</p>
-                        </tr>
-                        <tr>
-                            <td><label>Name </label></td>
-                            <td><input type="text" name="name"/></td>
-                        </tr>
-                        <tr>
-                            <td><label>D.O.B </label></td>
-                            <td><input type="date" name="dob"/></td>
-                        </tr>
-                        <tr>
-                            <td><label>Address </label></td>
-                            <td><input type="text" name="address"/></td>
-                        </tr>
-                        <tr>
-                            <td><label></label></td>
-                            <td><input type="submit" value="Signup" class="btn"/></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </form>
-            <br>
+            <p>Registration Success. Your credentials below</p>
+            <p>Username: </p>
+            <p>Password: </p>
+            <p>Status: </p>
             <a href="login-page.jsp">Back to Login</a>
         </div>
     </body>
