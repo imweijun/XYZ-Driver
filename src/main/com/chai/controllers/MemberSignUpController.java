@@ -29,7 +29,7 @@ public class MemberSignUpController extends HttpServlet {
         String dobString     = request.getParameter("dob");
         String address       = request.getParameter("address");
 
-        String userId        = firstName.substring(0,2) + "-" + lastName;
+        String userId        = firstName.substring(0,2).toLowerCase() + "-" + lastName.toLowerCase();
         DateService dateService = new DateService("yyyy-MM-dd");
         Member newMember     = null;
 

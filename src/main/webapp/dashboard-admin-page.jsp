@@ -46,7 +46,7 @@
                     <c:forEach items="${members}" var="member">
                         <tr>
                             <th>${member.id}</th>
-                            <th>${member.name}</th>
+                            <th>${member.firstName} ${member.lastName}</th>
                             <th>${member.address}</th>
                             <th>${member.dobString}</th>
                             <th>${member.status}</th>
@@ -68,7 +68,7 @@
                         <tr>
                             <c:if test = "${member.balance > 0}">
                                 <th>${member.id}</th>
-                                <th>${member.name}</th>
+                                <th>${member.firstName} ${member.lastName}</th>
                                 <th>${member.balance}</th>
                             </c:if>
 

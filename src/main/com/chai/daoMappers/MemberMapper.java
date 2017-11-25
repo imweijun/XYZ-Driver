@@ -26,7 +26,7 @@ public class MemberMapper {
             member.setId(resultSet.getString("id"));
             String nameTokens[] = resultSet.getString("name").split(" ");
 
-            member.setFirstName(nameTokens[2]);
+            member.setFirstName(nameTokens[0]);
             member.setLastName(nameTokens[1]);
 
             member.setAddress(resultSet.getString("address"));
