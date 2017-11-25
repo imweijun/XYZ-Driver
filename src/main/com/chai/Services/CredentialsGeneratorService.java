@@ -6,15 +6,15 @@ public class CredentialsGeneratorService {
 
 
 
-    private String generateRandomString(){
-        return UUID.randomUUID().toString().replace("-", "");
+    private static String generateRandomString(){
+        return UUID.randomUUID().toString().replace("-", "").substring(0, 5);
     }
 
-    public String generateRandomPassword(){
+    public static String generateRandomPassword(){
         return generateRandomString();
     }
 
-    public String generateUserId(String name){
+    public static String generateUserId(String name){
         return name + "-" +(generateRandomString());
     }
 
