@@ -6,14 +6,25 @@
 
     <display-name>Archetype Created Web Application</display-name>
     <servlet>
-        <servlet-name>AuthenticationController</servlet-name>
+        <servlet-name>MemberAuthenticationController</servlet-name>
         <servlet-class>
-            chai.controllers.AuthenticationController
+            chai.controllers.MemberAuthenticationController
         </servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>AuthenticationController</servlet-name>
-        <url-pattern>/authenticate</url-pattern>
+        <servlet-name>MemberAuthenticationController</servlet-name>
+        <url-pattern>/authenticate-member</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdminAuthenticationController</servlet-name>
+        <servlet-class>
+            chai.controllers.AdminAuthenticationController
+        </servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminAuthenticationController</servlet-name>
+        <url-pattern>/authenticate-admin</url-pattern>
     </servlet-mapping>
 </web-app>
 

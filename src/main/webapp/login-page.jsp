@@ -9,13 +9,14 @@
     <body>
         <div id="wrapper">
             <div id="header">
-                <h2>XYZ Driver Association</h2>
+                <h2>XYZ Driver Association (Member)</h2>
+                <a href="${pageContext.request.contextPath}/admin-login-page.jsp">Log in as Admin</a>
             </div>
         </div>
         <div id="container">
             <h3>Login</h3>
             <!-- we only link to jsp now for testing -->
-            <form action="${pageContext.request.contextPath}/authenticate" method="POST">
+            <form action="${pageContext.request.contextPath}/authenticate-member" method="POST">
                 <table>
                     <tbody>
                         <tr>

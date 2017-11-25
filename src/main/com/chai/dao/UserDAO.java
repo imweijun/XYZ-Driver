@@ -1,5 +1,6 @@
 package chai.dao;
 
+import chai.daoMappers.UserMapper;
 import chai.factories.DataSourceFactory;
 import chai.models.User;
 
@@ -12,9 +13,11 @@ import java.sql.SQLException;
 public class UserDAO {
 
     private DataSource dataSource;
+    private UserMapper userMapper;
 
     public UserDAO(){
         this.dataSource = DataSourceFactory.getMySqlDataSource();
+        this.userMapper = new UserMapper();
     }
 
 
@@ -32,26 +35,17 @@ public class UserDAO {
         try {
             connection                  = this.dataSource.getConnection();
             String getPasswordSqlString = "SELECT * from users " +
-                    "WHERE id = ?";
+                    "WHERE id = ? " +
+                    "AND status <> ? ";
 
             preparedStatement           = connection.prepareStatement(getPasswordSqlString);
             preparedStatement.setString(1, userid);
+            preparedStatement.setString(2, "ADMIN");
 
             System.out.println(getPasswordSqlString);
             resultSet                   = preparedStatement.executeQuery();
 
-            if(!resultSet.isBeforeFirst()){
-                return null;
-            }
-
-            while(resultSet.next()){
-                String id = resultSet.getString(1);
-
-                user.setId(id);
-                user.setPassword(resultSet.getString(2));
-                user.setStatus(resultSet.getString(3));
-
-            }
+            user = this.userMapper.mapSingleUser(resultSet);
 
             connection.close();
             preparedStatement.close();
@@ -62,4 +56,44 @@ public class UserDAO {
 
         return user;
     }
+
+
+    /**
+     * Get User details from db based on userId
+     * @param userid User's id to search for
+     * @return User if found. NULL if not found
+     */
+    public User getUserAdmin(String userid){
+        Connection connection               = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet                 = null;
+        User adminUser                      = new User();
+
+        try {
+            connection                  = this.dataSource.getConnection();
+            String getPasswordSqlString = "SELECT * from users " +
+                    "WHERE id = ? " +
+                    "AND status = ? ";
+
+            preparedStatement           = connection.prepareStatement(getPasswordSqlString);
+            preparedStatement.setString(1, userid);
+            preparedStatement.setString(2, "ADMIN");
+
+            System.out.println(getPasswordSqlString);
+            resultSet                   = preparedStatement.executeQuery();
+
+            adminUser = this.userMapper.mapSingleUser(resultSet);
+
+            connection.close();
+            preparedStatement.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return adminUser;
+    }
+
+
+
 }

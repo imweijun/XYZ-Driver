@@ -1,8 +1,6 @@
 package chai.controllers;
 
-
 import chai.Services.AuthenticationService;
-import chai.dao.UserDAO;
 import chai.models.User;
 
 import javax.servlet.ServletException;
@@ -12,8 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-// Maps to /authenticate
-public class AuthenticationController extends HttpServlet{
+public class AdminAuthenticationController extends HttpServlet {
 
     /**
      * Acquire userId and password from POST parameter
@@ -22,26 +19,24 @@ public class AuthenticationController extends HttpServlet{
      * Error message if failed
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        response.setContentType("application/json");
+
         String userId   = request.getParameter("userId");
         String password = request.getParameter("password");
 
-        PrintWriter writer = response.getWriter();
         AuthenticationService authenticationService = new AuthenticationService();
-        User user = authenticationService.logIn(userId, password);
+        User admin = authenticationService.adminLogin(userId, password);
 
         // Redirect to error log in page if user not found
-        if(user == null){
-            response.sendRedirect(request.getContextPath() + "/login-page-error.jsp");
-           return;
+        if(admin == null){
+            response.sendRedirect(request.getContextPath() + "/admin-login-page-error.jsp");
+            return;
         }
 
 
         // Redirect to dashboard page after logged in.
         // Attach User object in variable loggedInUser, so its accisable in JSP
-        request.setAttribute("loggedInUser", user);
-        request.getRequestDispatcher("dashboard-user-page.jsp").forward(request, response);
+        request.setAttribute("loggedInUser", admin);
+        request.getRequestDispatcher("dashboard-admin-page.jsp").forward(request, response);
 
     }
-
 }
