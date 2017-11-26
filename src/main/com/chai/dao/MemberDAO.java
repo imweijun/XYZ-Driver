@@ -114,8 +114,6 @@ public class MemberDAO {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet                 = null;
 
-
-
         DateService dateService = new DateService("yyyy-MM-dd");
 
         try {
@@ -123,13 +121,9 @@ public class MemberDAO {
             String retrieveString = "SELECT * FROM members " +
                     "WHERE id = ? ";
 
-            System.out.println("SQL " + retrieveString);
-
             preparedStatement           = connection.prepareStatement(retrieveString);
             preparedStatement.setString(1, memberId);
             resultSet = preparedStatement.executeQuery();
-
-
 
             member = this.memberMapper.mapMember(resultSet);
 

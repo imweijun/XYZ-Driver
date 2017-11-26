@@ -85,4 +85,51 @@ public class ClaimDAO {
         }
     }
 
+
+    public List<Claim> getMemberClaimsInYear(String memberId, String year){
+        List<Claim> claims = new ArrayList<Claim>();
+
+
+
+        Connection connection               = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet                 = null;
+
+        try {
+            connection                  = this.dataSource.getConnection();
+            String getPasswordSqlString = "SELECT  c.id as 'claim_id', m.id as 'member_id', c.date, rationale, c.status, amount, name " +
+                    "FROM claims c " +
+                    "JOIN members m " +
+                    "ON (c.mem_id = m.id) " +
+                    "WHERE c.mem_id = ? " +
+                    "AND (c.date > ? AND c.date < ?) " +
+                    "GROUP BY c.id ";
+
+
+
+            preparedStatement           = connection.prepareStatement(getPasswordSqlString);
+            preparedStatement.setString(1, memberId);
+            preparedStatement.setString(2, year);
+            preparedStatement.setString(3, String.valueOf(Integer.parseInt(year) + 1));
+
+            System.out.println(preparedStatement.toString());
+            resultSet = preparedStatement.executeQuery();
+
+            claims = this.claimMapper.mapClaims(resultSet);
+
+            connection.close();
+            preparedStatement.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return claims;
+    }
+
+
+
 }

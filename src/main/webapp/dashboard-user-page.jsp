@@ -121,7 +121,7 @@
                         <%--<p>Username and Password will be automatic generated.</p>--%>
                     <%--</tr>--%>
                     <%--<tr>--%>
-                        <%--<td><label>First Name </label></td>--%> 
+                        <%--<td><label>First Name </label></td>--%>
                         <%--<td><input type="text" name="firstName"/></td>--%>
                     <%--</tr>--%>
                     <%--<tr>--%>

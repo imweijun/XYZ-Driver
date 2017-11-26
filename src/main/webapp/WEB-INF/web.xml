@@ -82,6 +82,17 @@
         <url-pattern>/member-pay</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>CheckClaimEligibility</servlet-name>
+        <servlet-class>
+            chai.controllers.CheckClaimEligibilityController
+        </servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CheckClaimEligibility</servlet-name>
+        <url-pattern>/claim/eligibility</url-pattern>
+    </servlet-mapping>
+
     <session-config>
         <session-timeout>20</session-timeout><!-- 20 minutes session -->
     </session-config>

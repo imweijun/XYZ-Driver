@@ -1,8 +1,12 @@
 package chai.Services;
 
 import chai.dao.MemberDAO;
+import chai.models.Claim;
 import chai.models.Member;
+import org.apache.commons.lang3.time.DateUtils;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 public class MemberService {
@@ -23,6 +27,34 @@ public class MemberService {
 
     public void updateMemberStatus(String newStatus, String memberId){
         this.memberDAO.updateStatus(newStatus, memberId);
+    }
+
+    public boolean getClaimEligibility(String memberId){
+
+        boolean eligibility = true;
+
+        ClaimService claimService = new ClaimService();
+        DateService dateService = new DateService("yyyy");
+
+
+        Member member = this.memberDAO.get(memberId);
+
+        List<Claim> claims = claimService.getMemberClaimsInYear(memberId, dateService.dateToString(new Date()));
+
+        if(member == null){
+            return false;
+        }
+
+        if(DateUtils.addMonths(member.getDor(), 6).after(new Date())){
+            eligibility = false;
+        }
+
+        if(claims != null && claims.size() >= 2){
+            eligibility = false;
+        }
+
+        return eligibility;
+
     }
 
 

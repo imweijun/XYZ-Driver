@@ -50,7 +50,6 @@ public class MemberMapper {
 
         DateService dateService = new DateService("yyyy-MM-dd");
 
-
         Member member = new Member();
 
         resultSet.next();
@@ -63,6 +62,7 @@ public class MemberMapper {
 
         member.setAddress(resultSet.getString("address"));
         member.setDob(dateService.stringToDate(resultSet.getString("dob")));
+        member.setDor(dateService.stringToDate(resultSet.getString("dor")));
         member.setStatus(resultSet.getString("status"));
         member.setBalance(resultSet.getFloat("balance"));
 
