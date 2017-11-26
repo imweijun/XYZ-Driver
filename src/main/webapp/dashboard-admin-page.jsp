@@ -3,10 +3,23 @@
 <%@ page import="java.util.List" %>
 <%@ page import="chai.Services.ClaimService" %>
 <%@ page import="chai.models.Claim" %>
+<%@ page import="chai.models.User" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 
 <%
-    MemberService memberService = new MemberService();
+    User loggedInUser = (User) session.getAttribute("loggedInUser");
+
+    if(loggedInUser == null){
+        response.sendRedirect("login-page.jsp");
+        return;
+    }
+
+    if(!loggedInUser.getStatus().equals("ADMIN")){
+        response.sendRedirect("dashboard-user-page.jsp");
+
+
+
+        MemberService memberService = new MemberService();
     List<Member> members = memberService.getAllMembers();
     pageContext.setAttribute("members", members);
 

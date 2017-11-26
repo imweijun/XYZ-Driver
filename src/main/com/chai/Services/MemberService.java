@@ -41,11 +41,14 @@ public class MemberService {
 
         List<Claim> claims = claimService.getMemberClaimsInYear(memberId, dateService.dateToString(new Date()));
 
+        System.out.println("================CLAIMS SIZE: " + claims.size() + " ================================");
+
         if(member == null){
             return false;
         }
 
         if(DateUtils.addMonths(member.getDor(), 6).after(new Date())){
+            System.out.println("REGISTERED 6 months!!");
             eligibility = false;
         }
 

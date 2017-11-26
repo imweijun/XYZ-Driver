@@ -11,6 +11,15 @@
 
     User loggedInUser = (User) session.getAttribute("loggedInUser");
 
+    if(loggedInUser == null){
+        response.sendRedirect("login-page.jsp");
+        return;
+    }
+
+    if(loggedInUser.getStatus().equals("ADMIN")){
+        response.sendRedirect("dashboard-admin-page.jsp");
+    }
+
     PaymentService paymentService = new PaymentService();
     List<Payment> payments = paymentService.getPaymentOfMember(loggedInUser.getId());
 
@@ -42,7 +51,7 @@
             </div>
         </div>
         <div id="container">
-            <h3>DashBoard - ${member.firstName} ${member.lastName} (${member.status}) </h3>
+            <h3>DashBoard - <span id="userId">${member.id}</span> (${member.status}) </h3>
                 <table>
                     <tbody>
                         <tr></tr>
@@ -114,6 +123,7 @@
 
 
             <h3>Submit Claim</h3>
+            <p style="color: red; display: none;" id="uneligible">Uneligible for claim.</p>
             <form action="${pageContext.request.contextPath}/submit-claim" method="POST" id="submitClaim">
                 <table>
                     <tbody>
@@ -136,3 +146,25 @@
         </div>
     </body>
 </html>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"> </script>
+
+<script>
+
+    $(document).ready(function () {
+
+        var userId = $("#userId").text();
+        console.log("http://localhost:8080/xyz-driver/claim/eligibility?member-id="+userId);
+
+        $.get( "http://localhost:8080/xyz-driver/claim/eligibility?member-id="+userId, function( data ) {
+
+            if(data === false){
+                $("#submitClaim").hide();
+                $("#uneligible").show();
+            }
+
+        });
+
+    });
+
+</script>
