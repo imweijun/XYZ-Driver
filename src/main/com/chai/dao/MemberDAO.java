@@ -89,8 +89,8 @@ public class MemberDAO {
             preparedStatement           = connection.prepareStatement(getPasswordSqlString);
             resultSet = preparedStatement.executeQuery();
 
-            MemberMapper memberMapper = new MemberMapper();
-            members = memberMapper.mapMembers(resultSet);
+
+            members = this.memberMapper.mapMembers(resultSet);
 
             connection.close();
             preparedStatement.close();

@@ -2,12 +2,18 @@
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import="chai.models.Member" %>
 <%@ page import="java.util.List" %>
+<%@ page import="chai.Services.ClaimService" %>
+<%@ page import="chai.models.Claim" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 
 <%
     MemberService memberService = new MemberService();
     List<Member> members = memberService.getAllMembers();
     pageContext.setAttribute("members", members);
+
+    ClaimService claimService = new ClaimService();
+    List<Claim> claims = claimService.getAllClaims();
+    pageContext.setAttribute("claims", claims);
 %>
 
 <!DOCTYPE html>
@@ -65,20 +71,19 @@
                         <th>Amount (�)</th>
                     </tr>
                     <c:forEach items="${members}" var="member">
-                        <tr>
-                            <c:if test = "${member.balance > 0}">
+                        <c:if test = "${member.balance > 0}">
+                            <tr>
                                 <th>${member.id}</th>
                                 <th>${member.firstName} ${member.lastName}</th>
                                 <th>${member.balance}</th>
-                            </c:if>
-
-                        </tr>
+                            </tr>
+                        </c:if>
                     </c:forEach>
                 </table>
                 
                 <div style="clear: both;"></div> <br>
                 
-                <h3>Claims</h3>
+                <h3>Submitted Claims</h3>
                 <table>
                     <tr>
                         <th>ID</th>
@@ -88,39 +93,21 @@
                         <th></th>
                         <th></th>
                     </tr>
-                    <tr>
-                        <th>mem-3</th>
-                        <th>Member 3</th>
-                        <th>Change Wheels</th>
-                        <th>30</th>
-                        <th>APPROVE</th>
-                        <th>REJECT</th>
-                    </tr>
-                    <tr>
-                        <th>mem-3</th>
-                        <th>Member 3</th>
-                        <th>Change Wheels</th>
-                        <th>30</th>
-                        <th>APPROVE</th>
-                        <th>REJECT</th>
-                    </tr>
-                    <tr>
-                        <th>mem-3</th>
-                        <th>Member 3</th>
-                        <th>Change Wheels</th>
-                        <th>30</th>
-                        <th>APPROVE</th>
-                        <th>REJECT</th>
-                    </tr>
-                    <tr>
-                        <th>mem-3</th>
-                        <th>Member 3</th>
-                        <th>Change Wheels</th>
-                        <th>30</th>
-                        <th>APPROVE</th>
-                        <th>REJECT</th>
-                    </tr>
+                    <c:forEach items="${claims}" var="claim">
+                        <c:if test = "${claim.status == 'SUBMITTED'}">
+                            <tr >
+
+                                <th>${claim.id}</th>
+                                <th>${claim.member.firstName} ${claim.member.lastName}</th>
+                                <th>${claim.rationale}</th>
+                                <th>${claim.amount}</th>
+                                <th>ACCEPT</th>
+                                <th>REJECT</th>
+                            </tr>
+                        </c:if>
+                    </c:forEach>
                 </table>
+
         </div>
     </body>
 </html>
