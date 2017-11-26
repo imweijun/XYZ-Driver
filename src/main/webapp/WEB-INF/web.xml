@@ -93,6 +93,17 @@
         <url-pattern>/claim/eligibility</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>SubmitClaimController</servlet-name>
+        <servlet-class>
+            chai.controllers.SubmitClaimController
+        </servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SubmitClaimController</servlet-name>
+        <url-pattern>/submit-claim</url-pattern>
+    </servlet-mapping>
+
     <session-config>
         <session-timeout>20</session-timeout><!-- 20 minutes session -->
     </session-config>

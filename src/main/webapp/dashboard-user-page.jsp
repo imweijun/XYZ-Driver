@@ -113,36 +113,25 @@
                 </table>
 
 
-            <%--<h3>Submit Claim</h3>--%>
-            <%--<form action="${pageContext.request.contextPath}/sign-up-member" method="POST">--%>
-                <%--<table>--%>
-                    <%--<tbody>--%>
-                    <%--<tr>--%>
-                        <%--<p>Username and Password will be automatic generated.</p>--%>
-                    <%--</tr>--%>
-                    <%--<tr>--%>
-                        <%--<td><label>First Name </label></td>--%>
-                        <%--<td><input type="text" name="firstName"/></td>--%>
-                    <%--</tr>--%>
-                    <%--<tr>--%>
-                        <%--<td><label>Last Name </label></td>--%>
-                        <%--<td><input type="text" name="lastName"/></td>--%>
-                    <%--</tr>--%>
-                    <%--<tr>--%>
-                        <%--<td><label>D.O.B </label></td>--%>
-                        <%--<td><input type="date" name="dob"/></td>--%>
-                    <%--</tr>--%>
-                    <%--<tr>--%>
-                        <%--<td><label>Address </label></td>--%>
-                        <%--<td><input type="text" name="address"/></td>--%>
-                    <%--</tr>--%>
-                    <%--<tr>--%>
-                        <%--<td><label></label></td>--%>
-                        <%--<td><input type="submit" value="Signup" class="btn"/></td>--%>
-                    <%--</tr>--%>
-                    <%--</tbody>--%>
-                <%--</table>--%>
-            <%--</form>--%>
+            <h3>Submit Claim</h3>
+            <form action="${pageContext.request.contextPath}/submit-claim" method="POST" id="submitClaim">
+                <table>
+                    <tbody>
+                    <tr>
+                        <td><label>Rationale </label></td>
+                        <td><input type="text" name="rationale"/></td>
+                    </tr>
+                    <tr>
+                        <td><label>Amount </label></td>
+                        <td><input type="text" name="amount"/></td>
+                    </tr>
+                    <tr>
+                        <td><label></label></td>
+                        <td><input type="submit" value="Submit" class="btn"/></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
 
         </div>
     </body>

@@ -21,6 +21,13 @@ public class ClaimService {
         return this.claimDAO.getMemberClaimsInYear(memberId, year);
     }
 
+    public Claim addClaim(Claim claim){
+        DateService dateService = new DateService("yyyy-MM-dd");
+        String dateString = dateService.dateToString(claim.getDate());
+
+        return this.claimDAO.add(claim, dateString);
+    }
+
     public void updateClaimStatus(String status, int claimId){
         this.claimDAO.updateClaimsStatus(status, claimId);
     }

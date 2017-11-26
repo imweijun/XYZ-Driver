@@ -59,6 +59,39 @@ public class ClaimDAO {
         return claims;
     }
 
+
+    public Claim add (Claim claim, String dateString){
+
+
+        Connection connection               = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connection                  = this.dataSource.getConnection();
+            String getPasswordSqlString = "INSERT INTO claims " +
+                    "(mem_id, date, rationale, status, amount) " +
+                    "VALUES (?, ? ,? ,? ,?)";
+
+            preparedStatement           = connection.prepareStatement(getPasswordSqlString);
+            preparedStatement.setString(1, claim.getMember().getId());
+            preparedStatement.setString(2, dateString);
+            preparedStatement.setString(3, claim.getRationale());
+            preparedStatement.setString(4, claim.getStatus());
+            preparedStatement.setFloat(5, claim.getAmount());
+
+            preparedStatement.execute();
+
+            connection.close();
+            preparedStatement.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return claim;
+    }
+
     public void updateClaimsStatus(String status, int claimId){
 
         Connection connection               = null;
