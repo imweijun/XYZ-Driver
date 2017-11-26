@@ -67,11 +67,11 @@ public class ClaimDAO {
 
         try {
             connection                  = this.dataSource.getConnection();
-            String getPasswordSqlString = "UPDATE claims " +
+            String updateString = "UPDATE claims " +
                     "SET status = ? " +
                     "WHERE id = ? ";
 
-            preparedStatement           = connection.prepareStatement(getPasswordSqlString);
+            preparedStatement           = connection.prepareStatement(updateString);
             preparedStatement.setString(1, status);
             preparedStatement.setInt(2, claimId);
 

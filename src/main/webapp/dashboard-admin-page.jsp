@@ -29,41 +29,85 @@
                 <a href="${pageContext.request.contextPath}/logout">Log out</a>
             </div>
         </div>
-        <div id="container">
+
             <h3>ADMIN ** DASHBOARD ** ADMIN ** DASHBOARD ** ADMIN ** DASHBOARD</h3>
 
+            <!-- All Users table  -->
+            <table>
+                <tr></tr>
+                <tr>
+                    <th><h3>User List</h3></th>
+                </tr>
+            </table>
 
 
                 <table>
-                    <tr></tr>
                     <tr>
-                        <th><h3>User List</h3></th>
-                    </tr>
-                </table>
-                <table>
-                    <tr>
-                        <th>User ID</th>
                         <th>Name</th>
-                        <th>Address</th>
                         <th>D.O.B</th>
                         <th>Status</th>
                         <th>Balance (�)</th>
+                        <th>Action</th>
                     </tr>
+
                     <c:forEach items="${members}" var="member">
-                        <tr>
-                            <th>${member.id}</th>
-                            <th>${member.firstName} ${member.lastName}</th>
-                            <th>${member.address}</th>
-                            <th>${member.dobString}</th>
-                            <th>${member.status}</th>
-                            <th>${member.balance}</th>
-                        </tr>
+                        <c:if test="${member.status == 'APPLIED'}">
+                            <tr>
+                                <th>${member.firstName} ${member.lastName}</th>
+                                <th>${member.dobString}</th>
+                                <th>${member.status}</th>
+                                <th>${member.balance}</th>
+                                <th>
+                                    <form action="${pageContext.request.contextPath}/handle-member" method="POST">
+                                        <input type="submit" name="memberAction" value="APPROVE" />
+                                        <input type="hidden" name="memberId" value="${member.id}">
+                                    </form>
+                                </th>
+                            </tr>
+                        </c:if>
+                    </c:forEach>
+
+                    <c:forEach items="${members}" var="member">
+                        <c:if test="${member.status == 'APPROVED'}">
+                            <tr>
+                                <th>${member.firstName} ${member.lastName}</th>
+                                <th>${member.dobString}</th>
+                                <th>${member.status}</th>
+                                <th>${member.balance}</th>
+                                <th>
+                                    <form action="${pageContext.request.contextPath}/handle-member" method="POST">
+                                        <input type="submit" name="memberAction" value="SUSPEND" />
+                                        <input type="hidden" name="memberId" value="${member.id}">
+                                    </form>
+                                </th>
+                            </tr>
+                        </c:if>
+                    </c:forEach>
+
+                    <c:forEach items="${members}" var="member">
+                        <c:if test="${member.status == 'SUSPENDED'}">
+                            <tr>
+                                <th>${member.firstName} ${member.lastName}</th>
+                                <th>${member.dobString}</th>
+                                <th>${member.status}</th>
+                                <th>${member.balance}</th>
+                                <th>
+                                    <form action="${pageContext.request.contextPath}/handle-member" method="POST">
+                                        <input type="submit" name="memberAction" value="UNSUSPEND" />
+                                        <input type="hidden" name="memberId" value="${member.id}">
+                                    </form>
+                                </th>
+                            </tr>
+                        </c:if>
                     </c:forEach>
                 </table>
-                
-                <div style="clear: both;"></div> <br>
-                
-                <h3>Outstanding</h3>
+
+
+            <div style="clear: both;"></div> <br>
+
+
+            <!-- Outstanding balance table -->
+                <h3>Outstanding Balance</h3>
                 <table>
                     <tr>
                         <th>ID</th>
@@ -82,9 +126,10 @@
                 </table>
                 
                 <div style="clear: both;"></div> <br>
-                
-                <h3>Submitted Claims</h3>
-                    <form action="${pageContext.request.contextPath}/handle-claim" method="POST">
+
+            <!-- Pending claims table  -->
+                <h3>Pending Claims</h3>
+
                         <table>
                             <tr>
                                 <th>ID</th>
@@ -103,17 +148,21 @@
                                             <th>${claim.rationale}</th>
                                             <th>${claim.amount}</th>
                                             <th>
-                                                <input type="submit" name="claimAction" value="ACCEPTED" />
-                                                <input type="hidden" name="claimId" value="${claim.id}">
+                                                <form action="${pageContext.request.contextPath}/handle-claim" method="POST">
+                                                    <input type="submit" name="claimAction" value="ACCEPT" />
+                                                    <input type="hidden" name="claimId" value="${claim.id}">
+                                                </form>
                                             </th>
                                             <th>
-                                                <input type="submit" name="claimAction" value="REJECTED" />
-                                                <input type="hidden" name="claimId" value="${claim.id}">
+                                                <form action="${pageContext.request.contextPath}/handle-claim" method="POST">
+                                                    <input type="submit" name="claimAction" value="REJECT" />
+                                                    <input type="hidden" name="claimId" value="${claim.id}">
+                                                </form>
                                             </th>
                                         </tr>
                                     </c:if>
                                 </c:forEach>
-                        </form>
+
                 </table>
 
         </div>

@@ -60,6 +60,17 @@
         <url-pattern>/handle-claim</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>HandleMemberController</servlet-name>
+        <servlet-class>
+            chai.controllers.HandleMemberController
+        </servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HandleMemberController</servlet-name>
+        <url-pattern>/handle-member</url-pattern>
+    </servlet-mapping>
+
     <session-config>
         <session-timeout>20</session-timeout><!-- 20 minutes session -->
     </session-config>

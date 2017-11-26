@@ -105,4 +105,31 @@ public class MemberDAO {
         return members;
     }
 
+
+    public void updateStatus(String newStatus, String memberId){
+
+        Connection connection               = null;
+        PreparedStatement preparedStatement = null;
+
+
+        try {
+            connection                  = this.dataSource.getConnection();
+            String updateString = "UPDATE members " +
+                    "SET status = ? " +
+                    "WHERE id = ? ";
+
+            preparedStatement           = connection.prepareStatement(updateString);
+            preparedStatement.setString(1, newStatus);
+            preparedStatement.setString(2, memberId);
+
+            preparedStatement.execute();
+
+            connection.close();
+            preparedStatement.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
