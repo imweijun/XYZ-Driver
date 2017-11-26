@@ -16,4 +16,8 @@ public class ClaimService {
     public List<Claim> getAllClaims(){
         return this.claimDAO.getAll();
     }
+
+    public void updateClaimStatus(String status, int claimId){
+        this.claimDAO.updateClaimsStatus(status, claimId);
+    }
 }

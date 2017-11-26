@@ -84,28 +84,36 @@
                 <div style="clear: both;"></div> <br>
                 
                 <h3>Submitted Claims</h3>
-                <table>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Rationale</th>
-                        <th>Amount (�)</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    <c:forEach items="${claims}" var="claim">
-                        <c:if test = "${claim.status == 'SUBMITTED'}">
-                            <tr >
-
-                                <th>${claim.id}</th>
-                                <th>${claim.member.firstName} ${claim.member.lastName}</th>
-                                <th>${claim.rationale}</th>
-                                <th>${claim.amount}</th>
-                                <th>ACCEPT</th>
-                                <th>REJECT</th>
+                    <form action="${pageContext.request.contextPath}/handle-claim" method="POST">
+                        <table>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Rationale</th>
+                                <th>Amount (�)</th>
+                                <th></th>
+                                <th></th>
                             </tr>
-                        </c:if>
-                    </c:forEach>
+
+                                <c:forEach items="${claims}" var="claim">
+                                    <c:if test = "${claim.status == 'SUBMITTED'}">
+                                        <tr >
+                                            <th>${claim.id}</th>
+                                            <th>${claim.member.firstName} ${claim.member.lastName}</th>
+                                            <th>${claim.rationale}</th>
+                                            <th>${claim.amount}</th>
+                                            <th>
+                                                <input type="submit" name="claimAction" value="ACCEPTED" />
+                                                <input type="hidden" name="claimId" value="${claim.id}">
+                                            </th>
+                                            <th>
+                                                <input type="submit" name="claimAction" value="REJECTED" />
+                                                <input type="hidden" name="claimId" value="${claim.id}">
+                                            </th>
+                                        </tr>
+                                    </c:if>
+                                </c:forEach>
+                        </form>
                 </table>
 
         </div>

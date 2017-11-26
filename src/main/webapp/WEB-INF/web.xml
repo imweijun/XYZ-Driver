@@ -49,6 +49,17 @@
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>HandleClaimController</servlet-name>
+        <servlet-class>
+            chai.controllers.HandleClaimController
+        </servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HandleClaimController</servlet-name>
+        <url-pattern>/handle-claim</url-pattern>
+    </servlet-mapping>
+
     <session-config>
         <session-timeout>20</session-timeout><!-- 20 minutes session -->
     </session-config>
