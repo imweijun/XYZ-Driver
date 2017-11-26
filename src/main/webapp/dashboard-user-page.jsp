@@ -2,6 +2,8 @@
 <%@ page import="chai.models.Payment" %>
 <%@ page import="java.util.List" %>
 <%@ page import="chai.models.User" %>
+<%@ page import="chai.Services.ClaimService" %>
+<%@ page import="chai.models.Claim" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%
 
@@ -10,7 +12,12 @@
     PaymentService paymentService = new PaymentService();
     List<Payment> payments = paymentService.getPaymentOfMember(loggedInUser.getId());
 
+    ClaimService claimService = new ClaimService();
+    List<Claim> claims = claimService.getAllClaims();
+
     pageContext.setAttribute("payments", payments);
+    pageContext.setAttribute("claims", claims);
+    pageContext.setAttribute("loggedInUser", loggedInUser);
 
 
 %>
@@ -79,28 +86,18 @@
                         <th>Status</th>
                         <th>Date</th>
                     </tr>
-                    <tr>
-                        <th>1</th>
-                        <th>Change Mirror</th>
-                        <th>120</th>
-                        <th>APPROVED</th>
-                        <th>2016-04-16</th>
-                    </tr>
-                    <tr>
-                        <th>2</th>
-                        <th>Repair Scratch</th>
-                        <th>120</th>
-                        <th>APPROVED</th>
-                        <th>2016-04-16</th>
-                    </tr>
-                    <tr>
-                        <th>3</th>
-                        <th>Polish Tyers</th>
-                        <th>120</th>
-                        <th>APPROVED</th>
-                        <th>2016-04-16</th>
-                    </tr>
-                    
+
+                    <c:forEach items="${claims}" var="claim">
+                        <c:if test="${claim.member.id eq loggedInUser.id}">
+                            <tr>
+                                <th>${claim.id}</th>
+                                <th>${claim.rationale}</th>
+                                <th>${claim.amount}</th>
+                                <th>${claim.status}</th>
+                                <th>${claim.dateString}</th>
+                            </tr>
+                        </c:if>
+                    </c:forEach>
                 </table>
                 
             </form>

@@ -1,5 +1,7 @@
 package chai.models;
 
+import chai.Services.DateService;
+
 import java.util.Date;
 
 public class Claim {
@@ -10,8 +12,11 @@ public class Claim {
     private String status;
     private float amount;
     private Member member;
+    private DateService dateService;
 
-    public Claim(){}
+    public Claim(){
+        this.dateService = new DateService("yyyy-MM-dd");
+    }
 
     public Claim(int id, Date date, String rationale, String status, float amount, Member member) {
         this.id = id;
@@ -20,6 +25,7 @@ public class Claim {
         this.status = status;
         this.amount = amount;
         this.member = member;
+        this.dateService = new DateService("yyyy-MM-dd");
     }
 
     public int getId() {
@@ -36,6 +42,10 @@ public class Claim {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getDateString(){
+        return this.dateService.dateToString(this.date);
     }
 
     public String getRationale() {
