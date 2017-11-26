@@ -106,6 +106,47 @@ public class MemberDAO {
     }
 
 
+    public Member get(String memberId){
+
+        Member member = new Member();
+
+        Connection connection               = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet                 = null;
+
+
+
+        DateService dateService = new DateService("yyyy-MM-dd");
+
+        try {
+            connection                  = this.dataSource.getConnection();
+            String retrieveString = "SELECT * FROM members " +
+                    "WHERE id = ? ";
+
+            System.out.println("SQL " + retrieveString);
+
+            preparedStatement           = connection.prepareStatement(retrieveString);
+            preparedStatement.setString(1, memberId);
+            resultSet = preparedStatement.executeQuery();
+
+
+
+            member = this.memberMapper.mapMember(resultSet);
+
+            connection.close();
+            preparedStatement.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return member;
+    }
+
+
     public void updateStatus(String newStatus, String memberId){
 
         Connection connection               = null;

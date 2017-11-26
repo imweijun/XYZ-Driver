@@ -60,9 +60,69 @@ public class PaymentDAO {
             e.printStackTrace();
         }
 
-        System.out.println("PAYMENTS=============================");
-        System.out.println(payments);
 
         return payments;
+    }
+
+
+    public void pay(String memberId){
+
+        Connection connection               = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connection                  = this.dataSource.getConnection();
+            String queryString = "UPDATE members " +
+                    "SET balance = 0 " +
+                    "WHERE id = ?; ";
+
+
+
+            preparedStatement           = connection.prepareStatement(queryString);
+            preparedStatement.setString(1, memberId);
+
+
+            preparedStatement.execute();
+
+            connection.close();
+            preparedStatement.close();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    public void addPaymentRecord(String memberId, String paymentType, float amount, String dateString, String timeString){
+
+        Connection connection               = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connection                  = this.dataSource.getConnection();
+            String queryString = "INSERT INTO payments(mem_id, type_of_payment, amount, date, time) " +
+                    "VALUES(?, ?, ?, ?, ?)";
+
+
+
+            preparedStatement           = connection.prepareStatement(queryString);
+            preparedStatement.setString(1, memberId);
+            preparedStatement.setString(2, paymentType);
+            preparedStatement.setFloat(3, amount);
+            preparedStatement.setString(4, dateString);
+            preparedStatement.setString(5, timeString);
+
+
+            preparedStatement.execute();
+
+            connection.close();
+            preparedStatement.close();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -42,4 +42,33 @@ public class MemberMapper {
     }
 
 
+    public Member mapMember(ResultSet resultSet) throws SQLException, ParseException {
+        if(!resultSet.isBeforeFirst()){
+            return null;
+        }
+
+
+        DateService dateService = new DateService("yyyy-MM-dd");
+
+
+        Member member = new Member();
+
+        resultSet.next();
+
+        member.setId(resultSet.getString("id"));
+        String nameTokens[] = resultSet.getString("name").split(" ");
+
+        member.setFirstName(nameTokens[0]);
+        member.setLastName(nameTokens[1]);
+
+        member.setAddress(resultSet.getString("address"));
+        member.setDob(dateService.stringToDate(resultSet.getString("dob")));
+        member.setStatus(resultSet.getString("status"));
+        member.setBalance(resultSet.getFloat("balance"));
+
+
+
+        return member;
+    }
+
 }

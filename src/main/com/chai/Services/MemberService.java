@@ -17,6 +17,10 @@ public class MemberService {
         return this.memberDAO.getAll();
     }
 
+    public Member get(String memberId){
+        return this.memberDAO.get(memberId);
+    }
+
     public void updateMemberStatus(String newStatus, String memberId){
         this.memberDAO.updateStatus(newStatus, memberId);
     }

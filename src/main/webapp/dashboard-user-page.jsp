@@ -4,6 +4,8 @@
 <%@ page import="chai.models.User" %>
 <%@ page import="chai.Services.ClaimService" %>
 <%@ page import="chai.models.Claim" %>
+<%@ page import="chai.models.Member" %>
+<%@ page import="chai.Services.MemberService" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%
 
@@ -15,9 +17,13 @@
     ClaimService claimService = new ClaimService();
     List<Claim> claims = claimService.getAllClaims();
 
+    MemberService memberService = new MemberService();
+    Member member = memberService.get(loggedInUser.getId());
+
     pageContext.setAttribute("payments", payments);
     pageContext.setAttribute("claims", claims);
     pageContext.setAttribute("loggedInUser", loggedInUser);
+    pageContext.setAttribute("member", member);
 
 
 %>
@@ -25,7 +31,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Dashboard</title>
+        <title>Dashboard - ${member.firstName} ${member.lastName} </title>
         <link type="text/css" rel="stylesheet" href="css/style.css">
     </head>
     <body>
@@ -36,16 +42,21 @@
             </div>
         </div>
         <div id="container">
-            <h3>DashBoard</h3>
-            <form action="/">
+            <h3>DashBoard - ${member.firstName} ${member.lastName} (${member.status}) </h3>
                 <table>
                     <tbody>
                         <tr></tr>
                         <tr>
                             <td><label>Outstanding:</label></td>
-                            <td><label>�100</label></td>
-                            <td><input type="submit" value="Payment" class="btn"/></td>
-                            <td><input type="submit" value="Claim" class="btn"/></td>
+                            <td><label>${member.balance}</label></td>
+                            <td>
+
+                                <form action="${pageContext.request.contextPath}/member-pay" method="POST">
+                                    <input type="hidden" name="memberId" value="${member.id}">
+                                    <input type="hidden" name="amount" value="${member.balance}">
+                                    <input type="submit" value="PAY" />
+                                </form>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -75,8 +86,8 @@
                     </table>
                 
                 <div style="clear: both;"></div>
-                <div style="clear: both;"></div>
-                
+
+
                 <h3>All Claims</h3>
                 <table>
                     <tr>
@@ -86,6 +97,7 @@
                         <th>Status</th>
                         <th>Date</th>
                     </tr>
+
 
                     <c:forEach items="${claims}" var="claim">
                         <c:if test="${claim.member.id eq loggedInUser.id}">
@@ -99,8 +111,39 @@
                         </c:if>
                     </c:forEach>
                 </table>
-                
-            </form>
+
+
+            <%--<h3>Submit Claim</h3>--%>
+            <%--<form action="${pageContext.request.contextPath}/sign-up-member" method="POST">--%>
+                <%--<table>--%>
+                    <%--<tbody>--%>
+                    <%--<tr>--%>
+                        <%--<p>Username and Password will be automatic generated.</p>--%>
+                    <%--</tr>--%>
+                    <%--<tr>--%>
+                        <%--<td><label>First Name </label></td>--%> 
+                        <%--<td><input type="text" name="firstName"/></td>--%>
+                    <%--</tr>--%>
+                    <%--<tr>--%>
+                        <%--<td><label>Last Name </label></td>--%>
+                        <%--<td><input type="text" name="lastName"/></td>--%>
+                    <%--</tr>--%>
+                    <%--<tr>--%>
+                        <%--<td><label>D.O.B </label></td>--%>
+                        <%--<td><input type="date" name="dob"/></td>--%>
+                    <%--</tr>--%>
+                    <%--<tr>--%>
+                        <%--<td><label>Address </label></td>--%>
+                        <%--<td><input type="text" name="address"/></td>--%>
+                    <%--</tr>--%>
+                    <%--<tr>--%>
+                        <%--<td><label></label></td>--%>
+                        <%--<td><input type="submit" value="Signup" class="btn"/></td>--%>
+                    <%--</tr>--%>
+                    <%--</tbody>--%>
+                <%--</table>--%>
+            <%--</form>--%>
+
         </div>
     </body>
 </html>
