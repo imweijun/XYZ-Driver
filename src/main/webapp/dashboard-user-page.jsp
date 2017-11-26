@@ -1,3 +1,20 @@
+<%@ page import="chai.Services.PaymentService" %>
+<%@ page import="chai.models.Payment" %>
+<%@ page import="java.util.List" %>
+<%@ page import="chai.models.User" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%
+
+    User loggedInUser = (User) session.getAttribute("loggedInUser");
+
+    PaymentService paymentService = new PaymentService();
+    List<Payment> payments = paymentService.getPaymentOfMember(loggedInUser.getId());
+
+    pageContext.setAttribute("payments", payments);
+
+
+%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -30,36 +47,25 @@
                 <div style="clear: both;"></div>
                 
                 <h3>All Payments</h3>
-                <table>
-                    <tr>
-                        <th>ID</th>
-                        <th>Payment Type</th>
-                        <th>Amount (�)</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                    </tr>
-                    <tr>
-                        <th>testID1</th>
-                        <th>FEE</th>
-                        <th>250</th>
-                        <th>2015-01-07</th>
-                        <th>10:08:21</th>
-                    </tr>
-                    <tr>
-                        <th>test2D</th>
-                        <th>FEE</th>
-                        <th>100</th>
-                        <th>2015-01-08</th>
-                        <th>11:08:19</th>
-                    </tr>
-                    <tr>
-                        <th>test3D</th>
-                        <th>FEE</th>
-                        <th>50</th>
-                        <th>2015-01-08</th>
-                        <th>12:15:46</th>
-                    </tr>
-                </table>
+                    <table>
+
+                            <tr>
+                                <th>ID</th>
+                                <th>Payment Type</th>
+                                <th>Amount (�)</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                            </tr>
+                            <c:forEach items="${payments}" var="payment">
+                                <tr>
+                                    <th>${payment.id}</th>
+                                    <th>${payment.typeOfPayment}</th>
+                                    <th>${payment.amount}</th>
+                                    <th>${payment.dateString}</th>
+                                    <th>${payment.timeString}</th>
+                                </tr>
+                            </c:forEach>
+                    </table>
                 
                 <div style="clear: both;"></div>
                 <div style="clear: both;"></div>

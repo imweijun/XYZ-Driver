@@ -1,5 +1,4 @@
 <%@ page import="chai.Services.MemberService" %>
-<%@ page import="java.io.PrintWriter" %>
 <%@ page import="chai.models.Member" %>
 <%@ page import="java.util.List" %>
 <%@ page import="chai.Services.ClaimService" %>

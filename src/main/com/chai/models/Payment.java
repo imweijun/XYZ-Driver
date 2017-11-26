@@ -1,5 +1,7 @@
 package chai.models;
 
+import chai.Services.DateService;
+
 import java.util.Date;
 
 public class Payment {
@@ -8,18 +10,23 @@ public class Payment {
     private String typeOfPayment;
     private float amount;
     private Date date;
-    private Date time;
     private Member member;
+    private DateService dateService;
+    private DateService timeService;
 
-    public Payment(){}
+    public Payment(){
+        this.dateService = new DateService("yyyy-MM-dd");
+        this.timeService = new DateService("hh:mm:ss");
+    }
 
-    public Payment(int id, String typeOfPayment, float amount, Date date, Date time, Member member) {
+    public Payment(int id, String typeOfPayment, float amount, Date date, Member member) {
         this.id = id;
         this.typeOfPayment = typeOfPayment;
         this.amount = amount;
         this.date = date;
-        this.time = time;
         this.member = member;
+        this.dateService = new DateService("yyyy-MM-dd");
+        this.timeService = new DateService("hh:mm:ss");
     }
 
     public int getId() {
@@ -54,12 +61,12 @@ public class Payment {
         this.date = date;
     }
 
-    public Date getTime() {
-        return time;
+    public String getDateString(){
+        return this.dateService.dateToString(this.date);
     }
 
-    public void setTime(Date time) {
-        this.time = time;
+    public String getTimeString(){
+        return this.timeService.dateToString(this.date);
     }
 
     public Member getMember() {

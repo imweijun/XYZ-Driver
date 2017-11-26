@@ -7,7 +7,7 @@ import java.util.List;
 
 public class MemberService {
 
-    MemberDAO memberDAO;
+    private MemberDAO memberDAO;
 
     public MemberService(){
         this.memberDAO = new MemberDAO();
